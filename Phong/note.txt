@@ -1,0 +1,5 @@
+Chức năng đăng nhập lỗi SQLi -> ' or 1=1 -- - -> đăng nhập với tài khoản admin
+Download file lỗi path traversal -> thay đường dẫn file truy cập được file nhạy cảm
+IDOR -> trang profile thay user_id -> truy cập được các người dùng khác
+File upload -> cập nhật ảnh đại diện của user -> RCE
+XSS -> comment sản phẩm
