@@ -1,0 +1,5 @@
+Vulnerable Shop Guide
+This is a sample guide for using the Vulnerable Shop website.
+- Browse products in the shop section.
+- Register an account to comment and purchase.
+- For admins: Manage users and products via the admin dashboard. Note: This website is for educational purposes only.
