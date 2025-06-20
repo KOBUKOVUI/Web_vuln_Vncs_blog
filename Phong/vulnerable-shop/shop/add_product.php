@@ -41,7 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/add_product.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 <main>
     <h2>Add New Product</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -61,11 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="image">Product Image:</label>
             <input type="file" id="image" name="image">
         </div>
-        <button type="submit">Add Product</button>
+        <button type="submit" onclick="return confirm('Are you sure you want to add this product?');">Add Product</button>
     </form>
     <br>
-    <p><a href="<?php echo BASE_URL; ?>shop/products.php" class="btn" >Back to Products</a></p>
+    <p><a href="<?php echo BASE_URL; ?>index.php" class="btn" >Back to Products</a></p>
 </main>
+</html>
 
 <?php
 require_once '../includes/footer.php';

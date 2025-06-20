@@ -43,22 +43,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 <main>
     <h2>Edit Profile</h2>
     <form method="POST" action="">
-        <div>
+        <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8'); ?>" required>
+            <input type="email"id="email" name="email" value="<?php echo htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8'); ?>" required>
         </div>
-        <div>
+        <div class="form-group">
             <label for="full_name">Full Name:</label>
-            <input type="text" id="full_name" name="full_name" value="<?php echo htmlspecialchars($user['full_name'] ?: '', ENT_QUOTES, 'UTF-8'); ?>">
+            <input type="text"id="full_name" name="full_name" value="<?php echo htmlspecialchars($user['full_name'] ?: '', ENT_QUOTES, 'UTF-8'); ?>">
         </div>
-        <button type="submit">Save Changes</button>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to update your profile?');">Save Changes</button>
     </form>
     <p><a href="<?php echo BASE_URL; ?>user/profile.php">Back to Profile</a></p>
 </main>
+</html>
 
 <?php
 require_once '../includes/footer.php';

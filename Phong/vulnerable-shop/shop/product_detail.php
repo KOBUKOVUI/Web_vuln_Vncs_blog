@@ -36,7 +36,14 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$product_id]);
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 <main>
     <h2><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></h2>
     <div class="product-detail">
@@ -53,9 +60,10 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <form method="POST" action="">
             <div>
                 <label for="comment">Add a Comment:</label>
-                <textarea id="comment" name="comment" required></textarea>
+                <textarea id="comment" name="comment" class="form-control" required></textarea>
             </div>
-            <button type="submit">Submit Comment</button>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit Comment</button>
         </form>
     <?php else: ?>
         <p><a href="<?php echo BASE_URL; ?>auth/login.php">Login</a> to add a comment.</p>
@@ -75,6 +83,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 </main>
+</html>
 
 <?php
 require_once '../includes/footer.php';

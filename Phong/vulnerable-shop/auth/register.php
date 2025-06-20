@@ -34,36 +34,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<main class="register-container">
+    <h2 class="form-title">Register</h2>
 
-<main>
-    <h2>Register</h2>
-    <?php if ($error): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
+    <?php if (!empty($error)): ?>
+        <p class="alert alert-danger"><?php echo $error; ?></p>
     <?php endif; ?>
-    <?php if ($success): ?>
-        <p style="color: green;"><?php echo $success; ?></p>
+
+    <?php if (!empty($success)): ?>
+        <p class="alert alert-success"><?php echo $success; ?></p>
     <?php endif; ?>
+
     <form method="POST" action="">
-        <div>
+        <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
         </div>
-        <div>
+
+        <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
         </div>
-        <div>
+
+        <div class="form-group">
             <label for="full_name">Full Name:</label>
             <input type="text" id="full_name" name="full_name" required>
         </div>
-        <div>
+
+        <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit">Register</button>
+
+        <button type="submit" class="button_blue">Register</button>
     </form>
-    <p>Already have an account? <a href="<?php echo BASE_URL; ?>auth/login.php">Login</a></p>
+
+    <p class="login-link">Already have an account? 
+        <a href="<?php echo BASE_URL; ?>auth/login.php">Login</a>
+    </p>
 </main>
+
+</html>
 
 <?php
 require_once '../includes/footer.php';

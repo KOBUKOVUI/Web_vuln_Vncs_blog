@@ -30,7 +30,14 @@ if (isset($_GET['file']) && !empty($_GET['file'])) {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 <main>
     <h2>Download File</h2>
     <?php if ($error): ?>
@@ -42,6 +49,7 @@ if (isset($_GET['file']) && !empty($_GET['file'])) {
         <li><a href="<?php echo BASE_URL; ?>download.php?file=guide.txt">Guide (TXT)</a></li>
     </ul>
 </main>
+</html>
 
 <?php
 require_once 'includes/footer.php';

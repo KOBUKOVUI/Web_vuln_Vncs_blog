@@ -27,25 +27,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<main class="login-container">
+    <h2 class="login-title">Login</h2>
 
-<main>
-    <h2>Login</h2>
-    <?php if ($error): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
+    <?php if (!empty($error)): ?>
+        <p class="alert alert-danger" ><?php echo $error; ?></p>
     <?php endif; ?>
+
     <form method="POST" action="">
-        <div>
+        <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
         </div>
-        <div>
+
+        <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit">Login</button>
+
+        <button type="submit" class="button_blue">Login</button>
     </form>
-    <p>Don't have an account? <a href="<?php echo BASE_URL; ?>auth/register.php">Register</a></p>
+
+    <p class="register-link">Don't have an account?
+        <a href="<?php echo BASE_URL; ?>auth/register.php">Register</a>
+    </p>
 </main>
+</html>
 
 <?php
 require_once '../includes/footer.php';

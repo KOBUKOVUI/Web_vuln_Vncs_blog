@@ -2,7 +2,6 @@
 require_once '../config/config.php';
 require_once '../config/database.php';
 require_once '../includes/functions.php';
-require_once '../includes/header.php';
 
 if (!isLoggedIn() || !isAdmin()) {
     setFlashMessage('error', 'You must be an admin to access this page.');
@@ -89,81 +88,107 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
 }
 
 // Fetch all products
-$sql = "SELECT id, name, description, price, image, created_at FROM products ORDER BY created_at DESC";
+$sql = "SELECT id, name, description, price, image, created_at FROM products ORDER BY id ASC";
 $products = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/edit_product.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 
-<main>
-    <h2>Manage Products</h2>
-    <p><a href="<?php echo BASE_URL; ?>shop/add_product.php" class="btn">Add New Product</a></p>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Created</th>
-            <th>Actions</th>
-        </tr>
-        <?php foreach ($products as $product): ?>
-            <tr>
-                <td><?php echo $product['id']; ?></td>
-                <td><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></td>
-                <td>$<?php echo number_format($product['price'], 2); ?></td>
-                <td>
-                    <?php if ($product['image']): ?>
-                        <img src="<?php echo BASE_URL . 'uploads/products/' . htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?>" style="max-width: 50px;">
-                    <?php endif; ?>
-                </td>
-                <td><?php echo $product['created_at']; ?></td>
-                <td>
-                    <button class="btn" onclick="editProduct(<?php echo $product['id']; ?>, '<?php echo htmlspecialchars(addslashes($product['name']), ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars(addslashes($product['description'] ?: ''), ENT_QUOTES, 'UTF-8'); ?>')">Edit</button>
-                    <button class="btn btn-danger" onclick="if(confirm('Are you sure you want to delete this product?')){window.location.href='<?php echo BASE_URL; ?>admin/manage_products.php?action=delete&id=<?php echo $product['id']; ?>';}">Delete</button>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
-    <!-- Edit Product Modal -->
-    <div id="editProductModal" class="modal" style="display: none;">
-        <h3>Edit Product</h3>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="product_id" id="edit_product_id">
-            <div>
-                <label for="edit_name">Name:</label>
-                <input type="text" id="edit_name" name="name" required>
-            </div>
-            <div>
-                <label for="edit_description">Description:</label>
-                <textarea id="edit_description" name="description"></textarea>
-            </div>
-            <div>
-                <label for="edit_price">Price ($):</label>
-                <input type="number" id="edit_price" name="price" step="0.01" required>
-            </div>
-            <div>
-                <label for="edit_image">New Image (optional):</label>
-                <input type="file" id="edit_image" name="image">
-            </div>
-            <button type="submit" name="edit_product" class="btn">Save Changes</button>
-            <button type="button" class="btn" onclick="closeModal()">Cancel</button>
-        </form>
+<header class="site-header">
+    <div class="logo">
+        <a href="<?php echo BASE_URL; ?>admin/index.php">Admin Dashboard</a>
     </div>
+    <nav class="main-nav">
+            <ul>
+                <li><a href="<?php echo BASE_URL; ?>">Home</a></li>
+                <li><a href="<?php echo BASE_URL; ?>admin/manage_users.php">Manage Users</a></li>
+                <li><a href="<?php echo BASE_URL; ?>admin/manage_products.php">Manage Products</a></li>
+                <li><a href="<?php echo BASE_URL; ?>admin/manage_comments.php">Manage Comments</a></li>
+                <li><a href="<?php echo BASE_URL; ?>auth/logout.php" >Logout</a></li>
+            </ul>
+    </nav>
+    </header>
+    <main>
+        <h2>Manage Products</h2>
+        <p><a href="<?php echo BASE_URL; ?>shop/add_product.php" class="btn btn-primary">Add New Product</a></p>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <?php foreach ($products as $product): ?>
+                <tr>
+                    <td><?php echo $product['id']; ?></td>
+                    <td><?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td>$<?php echo number_format($product['price'], 2); ?></td>
+                    <td>
+                        <?php if ($product['image']): ?>
+                            <img src="<?php echo BASE_URL . 'uploads/products/' . htmlspecialchars($product['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8'); ?>" style="max-width: 50px;">
+                        <?php endif; ?>
+                    </td>
+                    <td><?php echo $product['created_at']; ?></td>
+                    <td>
+                        <button class="btn btn-info" onclick="editProduct(<?php echo $product['id']; ?>, '<?php echo htmlspecialchars(addslashes($product['name']), ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars(addslashes($product['description'] ?: ''), ENT_QUOTES, 'UTF-8'); ?>')" >Edit</button>
+                        <button class="btn btn-danger" onclick="if(confirm('Are you sure you want to delete this product?')){window.location.href='<?php echo BASE_URL; ?>admin/manage_products.php?action=delete&id=<?php echo $product['id']; ?>';}">Delete</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        </div>
+        <!-- Edit Product Modal -->
+        <div id="editProductModal" class="modal" style="display: none;">
+            <h3>Edit Product</h3>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="product_id" id="edit_product_id">
+                <div>
+                    <label for="edit_name">Name:</label>
+                    <input type="text" id="edit_name" name="name" required>
+                </div>
+                <div>
+                    <label for="edit_description">Description:</label>
+                    <textarea id="edit_description" name="description"></textarea>
+                </div>
+                <div>
+                    <label for="edit_price">Price ($):</label>
+                    <input type="number" id="edit_price" name="price" step="0.01" required>
+                </div>
+                <div>
+                    <label for="edit_image">New Image (optional):</label>
+                    <input type="file" id="edit_image" name="image">
+                </div>
+                <button type="submit" name="edit_product" class="btn" onclick="return confirm('Are you sure you want to update the information for this product?');">Save Changes</button>
+                <button type="button" class="btn" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
 
-    <script>
-        function editProduct(id, name, price, description) {
-            document.getElementById('edit_product_id').value = id;
-            document.getElementById('edit_name').value = name;
-            document.getElementById('edit_price').value = parseFloat(price).toFixed(2);
-            document.getElementById('edit_description').value = description;
-            document.getElementById('editProductModal').style.display = 'block';
-        }
+        <script>
+            function editProduct(id, name, price, description) {
+                document.getElementById('edit_product_id').value = id;
+                document.getElementById('edit_name').value = name;
+                document.getElementById('edit_price').value = parseFloat(price).toFixed(2);
+                document.getElementById('edit_description').value = description;
+                document.getElementById('editProductModal').style.display = 'block';
+            }
 
-        function closeModal() {
-            document.getElementById('editProductModal').style.display = 'none';
-        }
-    </script>
-</main>
+            function closeModal() {
+                document.getElementById('editProductModal').style.display = 'none';
+            }
+        </script> 
+</html>
 
 <?php
 require_once '../includes/footer.php';

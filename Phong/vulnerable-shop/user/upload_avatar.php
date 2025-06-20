@@ -37,7 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar'])) {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 <main>
     <h2>Upload Avatar</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -45,11 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar'])) {
             <label for="avatar">Choose Avatar:</label>
             <input type="file" id="avatar" name="avatar" required>
         </div>
-        <button type="submit">Upload</button>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to upload this file?');">Upload</button>
     </form>
     <p><a href="<?php echo BASE_URL; ?>user/profile.php">Back to Profile</a></p>
 </main>
+</html>
 
 <?php
 require_once '../includes/footer.php';
-?>
+?> 

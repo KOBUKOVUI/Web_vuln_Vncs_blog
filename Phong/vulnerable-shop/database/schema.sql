@@ -47,6 +47,7 @@ CREATE TABLE transactions (
     user_id INT,
     product_id INT,
     amount DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
     type ENUM('purchase', 'deposit') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),

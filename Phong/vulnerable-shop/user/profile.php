@@ -20,6 +20,15 @@ if (!$result) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 <main>
     <h2>User Profile</h2>
     <div class="profile-info">
@@ -36,12 +45,13 @@ if (!$result) {
         <?php endif; ?>
         <?php if ($user_id == $_SESSION['user_id']): ?>
             <p>
-                <a href="<?php echo BASE_URL; ?>user/edit_profile.php" class="btn">Edit Profile</a>
-                <a href="<?php echo BASE_URL; ?>user/upload_avatar.php" class="btn">Upload Avatar</a>
+                <a href="<?php echo BASE_URL; ?>user/edit_profile.php" class="btn btn-primary">Edit Profile</a>
+                <a href="<?php echo BASE_URL; ?>user/upload_avatar.php" class="btn btn-primary">Upload Avatar</a>
             </p>
         <?php endif; ?>
     </div>
 </main>
+</html>
 
 <?php
 require_once '../includes/footer.php';

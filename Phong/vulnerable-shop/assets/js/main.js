@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Confirm checkout
-    const checkoutButton = document.querySelector('form button.btn');
-    if (checkoutButton) {
-        checkoutButton.addEventListener('click', (e) => {
-            if (!confirm('Are you sure you want to complete the purchase?')) {
-                e.preventDefault();
-            }
-        });
-    }
+    // const checkoutButton = document.querySelector('form button.btn');
+    // if (checkoutButton) {
+    //     checkoutButton.addEventListener('click', (e) => {
+    //         if (!confirm('Are you sure you want to complete the purchase?')) {
+    //             e.preventDefault();
+    //         }
+    //     });
+    // }
 });
