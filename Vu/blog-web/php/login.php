@@ -32,7 +32,7 @@ if (isset($_POST['uname']) && isset($_POST['pass'])) {
          $fname =  $user['fname'];
          $id =  $user['id'];
          if ($username === $uname) {
-            if (password_verify($pass, $password)) {
+            if (md5($pass) == $password) {
                $_SESSION['user_id'] = $id;
                $_SESSION['username'] = $username;
 
