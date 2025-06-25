@@ -127,7 +127,7 @@ if (isset($_GET['post_id'])) {
 												</div>
 												<div class="p-2">
 													<span>@<?= $u['username'] ?></span>
-													<p><?= $comment['comment'] ?></p>
+													<p><?= htmlspecialchars($comment['comment']) ?></p> 
 													<small class="text-body-secondary"><?= $comment['crated_at'] ?></small>
 												</div>
 											</div>

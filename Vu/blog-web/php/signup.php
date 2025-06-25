@@ -27,8 +27,8 @@ if(isset($_POST['fname']) &&
     }else {
 
     	//Hash passworđ
-    	$pass = md5($pass); 
-
+    	$pass = password_hash($pass, PASSWORD_DEFAULT); 
+		//$passMD5 = md5($pass); 
     	$sql = "INSERT INTO users(fname, username, password) 
     	        VALUES(?,?,?)";
     	$stmt = $conn->prepare($sql);

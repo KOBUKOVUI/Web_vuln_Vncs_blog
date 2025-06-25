@@ -42,7 +42,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['username'])) {
 	 	<table class="table t1 table-bordered">
 		  <thead>
 		    <tr>
-		      <th scope="col">#</th>
 		      <th scope="col">Post Title</th>
 		      <th scope="col">Comment</th>
 		      <th scope="col">User</th>
@@ -61,7 +60,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['username'])) {
 		      	echo $p['post_title']; ?></a>
 		      </td>
 		      <td>
-		      	<?=$comment['comment']?>
+		      	<?=htmlspecialchars($comment['comment'])?>
 		      </td>
 		      <td>
 		      	<?php 
