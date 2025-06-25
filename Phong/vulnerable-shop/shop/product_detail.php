@@ -6,7 +6,7 @@ require_once '../includes/header.php';
 
 if (!isset($_GET['id']) || !($product_id = (int)$_GET['id'])) {
     setFlashMessage('error', 'Invalid product ID.');
-    redirect(BASE_URL . 'shop/products.php');
+    redirect(BASE_URL . '../index.php');
 }
 
 $sql = "SELECT id, name, description, price, image FROM products WHERE id = ?";
@@ -16,7 +16,7 @@ $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$product) {
     setFlashMessage('error', 'Product not found.');
-    redirect(BASE_URL . 'shop/products.php');
+    redirect(BASE_URL . '../index.php');
 }
 
 // Vulnerable: XSS in comment handling

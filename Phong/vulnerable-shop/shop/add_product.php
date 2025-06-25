@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare($sql);
         if ($stmt->execute([$name, $description, $price, $image, $user_id])) {
             setFlashMessage('success', 'Product added successfully.');
-            redirect(BASE_URL . 'shop/products.php');
+            redirect(BASE_URL . '../index.php');
         } else {
             setFlashMessage('error', 'Failed to add product.');
         }
