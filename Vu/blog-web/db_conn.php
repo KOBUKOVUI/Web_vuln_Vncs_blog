@@ -1,8 +1,8 @@
 <?php 
 
 $sName = "localhost";
-$uName = "root";
-$pass = "";
+$uName = "admin";
+$pass = "password";
 $db_name = "blog_db";
 
 try {

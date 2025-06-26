@@ -24,6 +24,20 @@ if (
    } else {
       $sql = "SELECT * FROM admin WHERE username = '$uname' AND password = '$pass'";
       $stmt = $conn->query($sql);
+      if ($stmt->rowCount() >= 1) {
+        $user = $stmt->fetch();
+
+        $_SESSION['admin_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+
+        header("Location: users.php");
+        exit;
+    }
+      else {
+         $em = "Incorect User name or password";
+         header("Location: ../admin-login.php?error=$em&$data");
+         exit;
+      }
       // $sql = "SELECT * FROM admin WHERE username = ?";
       // $stmt = $conn->prepare($sql);
       // $stmt->execute([$uname]);
@@ -52,20 +66,6 @@ if (
       //       exit;
       //    }
       // } 
-      if ($stmt->rowCount() >= 1) {
-        $user = $stmt->fetch();
-
-        $_SESSION['admin_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-
-        header("Location: users.php");
-        exit;
-    }
-      else {
-         $em = "Incorect User name or password";
-         header("Location: ../admin-login.php?error=$em&$data");
-         exit;
-      }
    }
 } else {
    header("Location: ../login.php?error=error");

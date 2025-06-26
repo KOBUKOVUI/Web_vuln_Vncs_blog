@@ -6,9 +6,9 @@ if(isset($_POST['fname']) &&
 
     include "../db_conn.php";
 
-    $fname = $_POST['fname'];
-    $uname = $_POST['uname'];
-    $pass = $_POST['pass'];
+    $fname = htmlspecialchars($_POST['fname']);
+    $uname = htmlspecialchars($_POST['uname']);
+    $pass = htmlspecialchars($_POST['pass']);
 
     $data = "fname=".$fname."&uname=".$uname;
     
@@ -28,7 +28,7 @@ if(isset($_POST['fname']) &&
 
     	//Hash passworđ
     	$pass = password_hash($pass, PASSWORD_DEFAULT); 
-		//$passMD5 = md5($pass); 
+		//$pass = md5($pass); 
     	$sql = "INSERT INTO users(fname, username, password) 
     	        VALUES(?,?,?)";
     	$stmt = $conn->prepare($sql);
